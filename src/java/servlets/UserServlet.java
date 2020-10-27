@@ -21,12 +21,22 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // TODO: Request the users from the database
+        
+        // TODO: Add the users to the request object
+        
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        // TODO: Get the edit or delete action (action=edit) (action=delete) (action=add)
+            
+        // TODO: Perform methods based on the action
+        
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
     }
 

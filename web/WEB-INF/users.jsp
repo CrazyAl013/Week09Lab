@@ -51,6 +51,7 @@
                     <br>
                     <input placeholder="Password" type="password" required name="password" />
                     <br>
+                    <input type="hidde" name="action" value="add" />
                     <select name="role">
                         <option value="system admin">System Admin</option>
                         <option value="regular user">Regular User</option>
