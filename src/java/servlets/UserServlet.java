@@ -5,12 +5,14 @@
  */
 package servlets;
 
+import java.util.List;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import models.*;
+import services.*;
 /**
  *
  * @author 584893
@@ -23,9 +25,13 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
         
         // TODO: Request the users from the database
+        UserService us = new UserService();
+//        List<User> users = us.getAll();
+// TODO: UserService is missin getAll()
         
         // TODO: Add the users to the request object
-        
+//        request.setAttribute("users", users);
+           
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
     }
 
