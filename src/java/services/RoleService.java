@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package services;
-
+import models.Role;
 import dataaccess.RoleDB;
 import java.util.List;
 
