@@ -38,7 +38,10 @@
         </style>
     </head>
     <body>
-
+        <div id="messageBox">
+            <p>${message}</p>
+        </div>
+        
         <div class="grid-container">
             <div class="grid-item">
                 <h3>Add User</h3>
