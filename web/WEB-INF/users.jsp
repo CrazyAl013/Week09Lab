@@ -51,11 +51,11 @@
                     <br>
                     <input placeholder="Password" type="password" required name="password" />
                     <br>
-                    <input type="hidde" name="action" value="add" />
+                    <input type="hidden" name="action" value="add" />
                     <select name="role">
-                        <option value="system admin">System Admin</option>
-                        <option value="regular user">Regular User</option>
-                        <option value="company admin">Company Admin</option>
+                        <option value="1">System Admin</option>
+                        <option value="2">Regular User</option>
+                        <option value="3">Company Admin</option>
                     </select>
                     <br>
                     <input type="submit" value="Save" />
@@ -90,16 +90,17 @@
             <div class="grid-item">
                 <h3>Edit User</h3>
                 <form>
-                    <input placeholder="Email" type="email" required name="email" value="${user.email}" />
+                    <input placeholder="Email" type="email" required name="email" value="${editUser.email}" />
                     <br>
-                    <input placeholder="First Name" type="text" required name="firstname" value="${user.firstname}" />
+                    <input placeholder="First Name" type="text" required name="firstname" value="${editUser.firstname}" />
                     <br>
-                    <input placeholder="Last Name" type="text" required name="lastname" value="${user.lastname}" />
-                    <br>
+                    <input placeholder="Last Name" type="text" required name="lastname" value="${editUser.lastname}" />
+                    <br
+                    <input type="hidden" name="action" value="update" />
                     <select name="role">
-                        <option value="system admin">System Admin</option>
-                        <option value="regular user">Regular User</option>
-                        <option value="company admin">Company Admin</option>
+                        <option value="1">System Admin</option>
+                        <option value="2">Regular User</option>
+                        <option value="3">Company Admin</option>
                     </select>
                     <br>
                     <input type="submit" value="Save" />
