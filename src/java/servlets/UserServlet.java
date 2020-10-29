@@ -47,9 +47,24 @@ public class UserServlet extends HttpServlet {
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String password = request.getParameter("password");
-        int role = Integer.parseInt(request.getParameter("role"));
+        int roleID = Integer.parseInt(request.getParameter("role"));
         Boolean active = false;
-
+        Role role = null;
+        
+        switch (roleID) {
+            case 1:
+                role = new Role(1, "System Admin");
+            break;
+            case 2:
+                role = new Role(2, "Regular User");
+            break;
+            case 3:
+                role = new Role(3, "Company Admin");
+            break;
+            default:
+                role = new Role(2, "Regular User");
+        }
+        
         // Create User Service
         UserService us = new UserService();
 
