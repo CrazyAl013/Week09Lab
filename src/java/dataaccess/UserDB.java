@@ -36,7 +36,7 @@ public class UserDB {
                 statement = connection.prepareStatement(getRole);
                 statement.setInt(1, roleId);
                 roleSet = statement.executeQuery();
-                
+                roleSet.next();
                 Role role = new Role(roleId, roleSet.getString(1));
                 
                 User user = new User(email, active, firstName, lastName, password, role);

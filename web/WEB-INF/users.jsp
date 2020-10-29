@@ -163,8 +163,8 @@
                     <c:forEach var="user" items="${users}">
                         <tr>
                             <td>${user.email}</td>
-                            <td>${user.firstname}</td>
-                            <td>${user.lastname}</td>
+                            <td>${user.firstName}</td>
+                            <td>${user.lastName}</td>
                             <td>${user.role.name}</td>
                             <td><a href="?action=edit&<c:out value='${user.email}'/>">Edit</a></td>
                             <td><a href="?action=delete&<c:out value='${user.email}'/>">Delete</a></td>

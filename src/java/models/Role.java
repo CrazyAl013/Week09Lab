@@ -11,11 +11,11 @@ package models;
  */
 public class Role {
     private int id;
-    private String Name;
+    private String name;
 
-    public Role(int id, String Name) {
+    public Role(int id, String name) {
         this.id = id;
-        this.Name = Name;
+        this.name = name;
     }
 
     public int getId() {
@@ -23,15 +23,15 @@ public class Role {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setId(int id) {
         this.id = id;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
     
 }
