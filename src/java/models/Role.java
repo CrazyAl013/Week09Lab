@@ -25,4 +25,13 @@ public class Role {
     public String getName() {
         return Name;
     }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setName(String Name) {
+        this.Name = Name;
+    }
+    
 }

@@ -35,39 +35,44 @@ public class User implements Serializable {
         this.role = role;
     }
 
-
-
-    public String getfirstName() {
-        return firstName;
-    }
-
-    public void setfirstName(int noteId) {
-        this.firstName = firstName;
-    }
-    
-
-    public String lastName() {
-        return lastName;
-    }
-
-    public void setlastName(String title) {
-        this.lastName = lastName;
-    }
-
-    public String getpassword() {
-        return password;
-    }
-
-    public void setpassword(String contents) {
-        this.password = password;
-    }
-
-    public String email() {
+    public String getEmail() {
         return email;
     }
 
-    public void setemail(String owner) {
+    public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Role getRole() {
@@ -77,6 +82,9 @@ public class User implements Serializable {
     public void setRole(Role role) {
         this.role = role;
     }
+
+
+
     
     
 }

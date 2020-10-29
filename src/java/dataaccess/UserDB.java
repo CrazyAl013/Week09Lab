@@ -41,6 +41,8 @@ public class UserDB {
                 
                 User user = new User(email, active, firstName, lastName, password, role);
                 users.add(user);
+                
+                DBUtil.closeResultSet(roleSet);
             }
         } finally {
             DBUtil.closeResultSet(usersSet);
@@ -50,13 +52,38 @@ public class UserDB {
         return users;
     }
     
-    public User get(int userId) throws Exception {
-        //TODO: actually do something.
-        return null;
+    public User get(String email) throws Exception {
+        User user = null;
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement statement = null;
+        ResultSet usersSet = null;
+        String sql = "SELECT * FROM user WHERE user_id=?";
+        
+        
+        return user;
     }
     
     public void insert(User user) throws Exception {
-        //TODO: actually do something.
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement statement = null;
+        String sql = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?)";
+        
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getEmail());
+            statement.setBoolean(2, user.getActive());
+            statement.setString(3, user.getFirstName());
+            statement.setString(4, user.getLastName());
+            statement.setString(5, user.getPassword());
+            statement.setInt(6, user.getRole().getId());
+            statement.executeUpdate();
+        } finally {
+            DBUtil.closePreparedStatement(statement);
+            pool.freeConnection(connection);
+        }
+        
     }
     
     public void update(User user) throws Exception {
