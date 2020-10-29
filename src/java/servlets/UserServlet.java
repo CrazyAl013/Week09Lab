@@ -26,20 +26,22 @@ public class UserServlet extends HttpServlet {
 
         // TODO: Request the users from the database
         UserService us = new UserService();
-        List<User> users = us.getAll();
-        
-// TODO: UserService is missin getAll()
+        try {
+            List<User> users = us.getAll();
 
-        // TODO: Add the users to the request object
-        request.setAttribute("users", users);
-        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
+            request.setAttribute("users", users);
+            getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
+        } catch(Exception e)  {
+            request.setAttribute("message", "No users found");
+            getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);  
+        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
         // TODO: Get the edit or delete action (action=edit) (action=delete) (action=add)
         String action = request.getParameter("action");
         String email = request.getParameter("email");
@@ -48,31 +50,32 @@ public class UserServlet extends HttpServlet {
         String password = request.getParameter("password");
         int role = Integer.parseInt(request.getParameter("role"));
         Boolean active = false;
-        
+
         // Create User Service
         UserService us = new UserService();
 
         // TODO: Perform methods based on the action
         try {
             switch (action) {
-            case "edit":
-                User user = us.get(email);
-                request.setAttribute("editUser", user);
-                break;
-            case "delete":
-                us.delete(email);
-                break;
-            case "add":
-                us.insert(email, active, firstname, lastname, password, role);
-                break;
-            case "update":
-                us.update(email, active, firstname, lastname, password, role);
-                break;
-            default:
-        }
+                case "edit":
+                    User user = us.get(email);
+                    request.setAttribute("editUser", user);
+                    break;
+                case "delete":
+//                us.delete(email);
+                    Stirng bla = "";
+                    break;
+                case "add":
+                    us.insert(email, active, firstname, lastname, password, role);
+                    break;
+                case "update":
+                    us.update(email, active, firstname, lastname, password, role);
+                    break;
+                default:
+            }
 
         } catch (Exception e) {
-            
+
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
