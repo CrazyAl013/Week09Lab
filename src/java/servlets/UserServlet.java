@@ -24,25 +24,24 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // TODO: Request the users from the database
         UserService us = new UserService();
         try {
             List<User> users = us.getAll();
 
             request.setAttribute("users", users);
-            getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
         } catch(Exception e)  {
-            request.setAttribute("message", "No users found");
-            getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);  
+            request.setAttribute("message", "No users found");  
         }
-
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
+        
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // TODO: Get the edit or delete action (action=edit) (action=delete) (action=add)
+        // Get the edit or delete action (action=edit) (action=delete) (action=add)
         String action = request.getParameter("action");
         String email = request.getParameter("email");
         String firstname = request.getParameter("firstname");
@@ -54,7 +53,7 @@ public class UserServlet extends HttpServlet {
         // Create User Service
         UserService us = new UserService();
 
-        // TODO: Perform methods based on the action
+        // Perform methods based on the action
         try {
             switch (action) {
                 case "edit":
@@ -62,8 +61,7 @@ public class UserServlet extends HttpServlet {
                     request.setAttribute("editUser", user);
                     break;
                 case "delete":
-//                us.delete(email);
-                    Stirng bla = "";
+                    us.delete(email);
                     break;
                 case "add":
                     us.insert(email, active, firstname, lastname, password, role);
@@ -75,7 +73,7 @@ public class UserServlet extends HttpServlet {
             }
 
         } catch (Exception e) {
-
+            request.setAttribute("message", "Could not perform action");
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
