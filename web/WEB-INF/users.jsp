@@ -42,7 +42,7 @@
         <div class="grid-container">
             <div class="grid-item">
                 <h3>Add User</h3>
-                <form>
+                <form method="POST" action="user">
                     <input placeholder="Email" type="email" required name="email" />
                     <br>
                     <input placeholder="First Name" type="text" required name="firstname" />
@@ -79,8 +79,8 @@
                             <td>${user.firstname}</td>
                             <td>${user.lastname}</td>
                             <td>${user.role}</td>
-                            <td><a href="action=edit">Edit</a></td>
-                            <td><a href="action=delete">Delete</a></td>
+                            <td><a href="?action=edit&<c:out value='${user.email}'/>">Edit</a></td>
+                            <td><a href="?action=delete&<c:out value='${user.email}'/>">Delete</a></td>
                         </tr>
 
                     </c:forEach>
@@ -89,7 +89,7 @@
 
             <div class="grid-item">
                 <h3>Edit User</h3>
-                <form>
+                <form method="POST" action="user">
                     <input placeholder="Email" type="email" required name="email" value="${editUser.email}" />
                     <br>
                     <input placeholder="First Name" type="text" required name="firstname" value="${editUser.firstname}" />
