@@ -7,12 +7,18 @@ package services;
 
 import models.User;
 import dataaccess.UserDB;
+import java.util.List;
 
 /**
  *
  * @author BTran
  */
 public class UserService {
+    public List<User> getAll() throws Exception {
+        UserDB userDB = new UserDB();
+        List<User> users = userDB.getAll();
+        return users;
+    }
     public User get(String email) throws Exception {
         UserDB userDB = new UserDB();
         User user = userDB.get(email);
@@ -44,7 +50,7 @@ public class UserService {
     }
     
     public void insert(String email, boolean activity, String first_name, String last_name, String password, int role) throws Exception{
-        User user = new User(0, email, activity, first_name, last_name, password, role);
+        User user = new User(email, activity, first_name, last_name, password, role);
         UserDB userDB = new UserDB();
         userDB.insert(user);
     }

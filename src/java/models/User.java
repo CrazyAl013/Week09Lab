@@ -20,18 +20,19 @@ public class User implements Serializable {
     private String firstName;
     private String lastName;
     private String password;
-
+    private Role role;
 
 
     public User () {
     }
 
-    public User(String email, boolean active, String firstName, String lastName, String password) {
+    public User(String email, boolean active, String firstName, String lastName, String password, Role role) {
         this.email = email;
         this.active = active;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
+        this.role = role;
     }
 
 
@@ -68,5 +69,14 @@ public class User implements Serializable {
     public void setemail(String owner) {
         this.email = email;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    
     
 }
