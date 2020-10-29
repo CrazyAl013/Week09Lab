@@ -12,6 +12,7 @@ import models.*;
  * @author Alex Tompkins - 821984
  */
 public class UserDB {
+
     public List<User> getAll() throws Exception {
         List<User> users = new ArrayList<>();
         ConnectionPool pool = ConnectionPool.getInstance();
@@ -19,7 +20,7 @@ public class UserDB {
         PreparedStatement statement = null;
         ResultSet usersSet = null;
         ResultSet roleSet = null;
-        
+
         String getUsers = "SELECT * FROM user";
         String getRole = "SELECT role_name FROM role where role_id=?";
         try {
@@ -32,16 +33,16 @@ public class UserDB {
                 String lastName = usersSet.getString(4);
                 String password = usersSet.getString(5);
                 int roleId = usersSet.getInt(6);
-                
+
                 statement = connection.prepareStatement(getRole);
                 statement.setInt(1, roleId);
                 roleSet = statement.executeQuery();
                 roleSet.next();
                 Role role = new Role(roleId, roleSet.getString(1));
-                
+
                 User user = new User(email, active, firstName, lastName, password, role);
                 users.add(user);
-                
+
                 DBUtil.closeResultSet(roleSet);
             }
         } finally {
@@ -51,25 +52,53 @@ public class UserDB {
         }
         return users;
     }
-    
+
     public User get(String email) throws Exception {
         User user = null;
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
         ResultSet usersSet = null;
-        String sql = "SELECT * FROM user WHERE user_id=?";
-        
-        
+        ResultSet roleSet = null;
+        String sql = "SELECT * FROM user WHERE email=?";
+        String getRole = "SELECT role_name FROM role where role_id=?";
+
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, email);
+            usersSet = statement.executeQuery();
+            usersSet.next();
+
+            String userEmail = usersSet.getString(1);
+            boolean active = usersSet.getBoolean(2);
+            String firstName = usersSet.getString(3);
+            String lastName = usersSet.getString(4);
+            String password = usersSet.getString(5);
+            int roleId = usersSet.getInt(6);
+
+            statement = connection.prepareStatement(getRole);
+            statement.setInt(1, roleId);
+            roleSet = statement.executeQuery();
+            roleSet.next();
+            Role role = new Role(roleId, roleSet.getString(1));
+
+            user = new User(email, active, firstName, lastName, password, role);
+
+        } finally {
+            DBUtil.closeResultSet(usersSet);
+            DBUtil.closePreparedStatement(statement);
+            pool.freeConnection(connection);
+        }
+
         return user;
     }
-    
+
     public void insert(User user) throws Exception {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
         String sql = "INSERT INTO user VALUES (?, ?, ?, ?, ?, ?)";
-        
+
         try {
             statement = connection.prepareStatement(sql);
             statement.setString(1, user.getEmail());
@@ -83,9 +112,9 @@ public class UserDB {
             DBUtil.closePreparedStatement(statement);
             pool.freeConnection(connection);
         }
-        
+
     }
-    
+
     public void update(User user) throws Exception {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
@@ -102,9 +131,9 @@ public class UserDB {
         } finally {
             DBUtil.closePreparedStatement(statement);
             pool.freeConnection(connection);
-        }        
+        }
     }
-    
+
     public void delete(User user) throws Exception {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
