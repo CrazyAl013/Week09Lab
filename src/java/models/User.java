@@ -15,22 +15,26 @@ import java.io.Serializable;
  * @author 808735
  */
 public class User implements Serializable {
-     
+    private String email;
+    private Boolean active=true;
     private String firstName;
     private String lastName;
     private String password;
-    private Boolean active=true;
-    private String email;
+
+
 
     public User () {
     }
 
-    public User(String firstName, String lastName, String password, String email) {
+    public User(String email, boolean active, String firstName, String lastName, String password) {
+        this.email = email;
+        this.active = active;
         this.firstName = firstName;
         this.lastName = lastName;
         this.password = password;
-        this.email = email;
     }
+
+
 
     public String getfirstName() {
         return firstName;

@@ -10,5 +10,19 @@ package models;
  * @author 808735
  */
 public class Role {
-    
+    private int id;
+    private String Name;
+
+    public Role(int id, String Name) {
+        this.id = id;
+        this.Name = Name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return Name;
+    }
 }
