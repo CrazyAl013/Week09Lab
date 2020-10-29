@@ -87,10 +87,36 @@ public class UserDB {
     }
     
     public void update(User user) throws Exception {
-        //TODO: actually do something.
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement statement = null;
+        String sql = "UPDATE user SET active=?, first_name=?, last_name=?, password=?, role=?";
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setBoolean(1, user.getActive());
+            statement.setString(2, user.getFirstName());
+            statement.setString(3, user.getLastName());
+            statement.setString(4, user.getPassword());
+            statement.setInt(5, user.getRole().getId());
+            statement.executeUpdate();
+        } finally {
+            DBUtil.closePreparedStatement(statement);
+            pool.freeConnection(connection);
+        }        
     }
     
     public void delete(User user) throws Exception {
-        //TODO: actually do something.
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection connection = pool.getConnection();
+        PreparedStatement statement = null;
+        String sql = "DELETE FROM user WHERE email=?";
+        try {
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, user.getEmail());
+            statement.executeUpdate();
+        } finally {
+            DBUtil.closePreparedStatement(statement);
+            pool.freeConnection(connection);
+        }
     }
 }
