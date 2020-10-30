@@ -95,13 +95,6 @@ public class UserServlet extends HttpServlet {
         // Perform methods based on the action
         try {
             switch (action) {
-                case "edit":
-                    User user = us.get(email);
-                    request.setAttribute("editUser", user);
-                    break;
-                case "delete":
-                    us.delete(email);
-                    break;
                 case "add":
                     us.insert(email, active, firstname, lastname, password, role);
                     break;

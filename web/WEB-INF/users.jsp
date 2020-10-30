@@ -178,16 +178,16 @@
                 <div class="formContainer">
                     <h3>Edit User</h3>
                     <form method="POST" action="users">
-                        <input placeholder="First Name" type="text" required name="firstname" value="${editUser.firstname}" />
+                        <input placeholder="First Name" type="text" required name="firstname" value="${editUser.firstName}" />
                         <br>
-                        <input placeholder="Last Name" type="text" required name="lastname" value="${editUser.lastname}" />
+                        <input placeholder="Last Name" type="text" required name="lastname" value="${editUser.lastName}" />
                         <br>
                         <input type="hidden" name="email" value="${editUser.email}" />
                         <input type="hidden" name="action" value="update" />
                         <select name="role">
-                            <option value="1" <c:if test="${user.role.id == 1}">selected</c:if>>System Admin</option>
-                            <option value="2" <c:if test="${user.role.id == 2}">selected</c:if>>Regular User</option>
-                            <option value="3" <c:if test="${user.role.id == 3}">selected</c:if>>Company Admin</option>
+                            <option value="1" <c:if test="${editUser.role.id == 1}">selected</c:if>>System Admin</option>
+                            <option value="2" <c:if test="${editUser.role.id == 2}">selected</c:if>>Regular User</option>
+                            <option value="3" <c:if test="${editUser.role.id == 3}">selected</c:if>>Company Admin</option>
                         </select>
                         <br>
                         <input type="submit" value="Update" />

@@ -119,7 +119,7 @@ public class UserDB {
         ConnectionPool pool = ConnectionPool.getInstance();
         Connection connection = pool.getConnection();
         PreparedStatement statement = null;
-        String sql = "UPDATE user SET active=?, first_name=?, last_name=?, password=?, role=?";
+        String sql = "UPDATE user SET active=?, first_name=?, last_name=?, password=?, role=? WHERE email=?";
         try {
             statement = connection.prepareStatement(sql);
             statement.setBoolean(1, user.getActive());
@@ -127,6 +127,7 @@ public class UserDB {
             statement.setString(3, user.getLastName());
             statement.setString(4, user.getPassword());
             statement.setInt(5, user.getRole().getId());
+            statement.setString(6, user.getEmail());
             statement.executeUpdate();
         } finally {
             DBUtil.closePreparedStatement(statement);
