@@ -117,7 +117,7 @@
         </style>
     </head>
     <body>
-        <c:if test="${message != ''}">
+        <c:if test="${message != null}">
         <div id="messageBox">
             <p>${message}</p>
         </div>
@@ -166,8 +166,8 @@
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>
                             <td>${user.role.name}</td>
-                            <td><a href="?action=edit&<c:out value='${user.email}'/>">Edit</a></td>
-                            <td><a href="?action=delete&<c:out value='${user.email}'/>">Delete</a></td>
+                            <td><a href="users?action=edit&email=<c:out value='${user.email}'/>">Edit</a></td>
+                            <td><a href="users?action=delete&email=<c:out value='${user.email}'/>">Delete</a></td>
                         </tr>
 
                     </c:forEach>

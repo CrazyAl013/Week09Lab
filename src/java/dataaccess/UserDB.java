@@ -68,7 +68,7 @@ public class UserDB {
             statement.setString(1, email);
             usersSet = statement.executeQuery();
             usersSet.next();
-
+            
             String userEmail = usersSet.getString(1);
             boolean active = usersSet.getBoolean(2);
             String firstName = usersSet.getString(3);

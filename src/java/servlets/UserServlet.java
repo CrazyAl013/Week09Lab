@@ -25,6 +25,30 @@ public class UserServlet extends HttpServlet {
             throws ServletException, IOException {
 
         UserService us = new UserService();
+        
+        String action = request.getParameter("action");
+        String email = request.getParameter("email");
+        
+        // Perform methods based on the action
+        try {
+            switch (action) {
+                case "edit":
+                    User user = us.get(email);
+                    request.setAttribute("editUser", user);
+                    break;
+                case "delete":
+                    us.delete(email);
+                    break;
+                default:
+                    break;
+            }
+
+        } catch (Exception e) {
+            if (action != null) {
+                request.setAttribute("message", "Could not perform action");
+            }
+        }
+        
         try {
             List<User> users = us.getAll();
 
@@ -85,10 +109,19 @@ public class UserServlet extends HttpServlet {
                     us.update(email, active, firstname, lastname, password, role);
                     break;
                 default:
+                    break;
             }
 
         } catch (Exception e) {
             request.setAttribute("message", "Could not perform action");
+        }
+        
+         try {
+            List<User> users = us.getAll();
+
+            request.setAttribute("users", users);
+        } catch(Exception e)  {
+            request.setAttribute("message", "No users found");  
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
