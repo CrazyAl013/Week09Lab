@@ -28,7 +28,7 @@ public class UserServlet extends HttpServlet {
         
         String action = request.getParameter("action");
         String email = request.getParameter("email");
-        
+
         // Perform methods based on the action
         try {
             switch (action) {
@@ -51,7 +51,7 @@ public class UserServlet extends HttpServlet {
         
         try {
             List<User> users = us.getAll();
-
+            
             request.setAttribute("users", users);
         } catch(Exception e)  {
             request.setAttribute("message", "No users found");  

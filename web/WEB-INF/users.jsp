@@ -166,8 +166,18 @@
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>
                             <td>${user.role.name}</td>
-                            <td><a href="users?action=edit&email=<c:out value='${user.email}'/>">Edit</a></td>
-                            <td><a href="users?action=delete&email=<c:out value='${user.email}'/>">Delete</a></td>
+                            
+                            <c:url value="users" var="editurl">
+                            <c:param name="action" value="edit"/>
+                            <c:param name="email" value="${user.email}"/>
+                            </c:url>
+                            <td><a href="${editurl}">Edit</a></td>
+                            
+                            <c:url value="users" var="deleteurl">
+                            <c:param name="action" value="delete"/>
+                            <c:param name="email" value="${user.email}"/>
+                            </c:url>                     
+                            <td><a href="${deleteurl}">Delete</a></td>
                         </tr>
 
                     </c:forEach>
