@@ -18,4 +18,10 @@ public class RoleDB {
             em.close();
         }
     }
+    
+    
+    public Role get(int id) throws Exception {
+    // TODO: write this to return the Role with the id passed in
+        return null;
+    }
 }

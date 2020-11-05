@@ -33,6 +33,7 @@ public class UserDB {
         }
     }
 
+    //TODO: check this is right
     public void insert(User user) throws Exception {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
         EntityTransaction transaction = em.getTransaction();

@@ -26,6 +26,11 @@ public class UserService {
     }
     
     public void insert(String email, boolean activity, String first_name, String last_name, String password, Role role) throws Exception{
+        
+        //TODO:
+        // replace Role role parameter with a int id, then get a Role object from RoleDB using the role id. then assign it to the user
+        // also add user to the Role User list
+        
         User user = new User(email, activity, first_name, last_name, password, role);
         UserDB userDB = new UserDB();
         userDB.insert(user);

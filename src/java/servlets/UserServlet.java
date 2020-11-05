@@ -75,6 +75,9 @@ public class UserServlet extends HttpServlet {
         Boolean active = false;
         Role role = null;
         
+//        
+//TODO: no longer want to create a Role object, just pass the int id
+//
         switch (roleID) {
             case 1:
                 role = new Role(1, "System Admin");
