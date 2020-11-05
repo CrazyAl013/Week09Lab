@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Users</title>
         
-        <link rel="stylesheet" href="main.css">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css" type="text/css">
 
     </head>
     <body>
