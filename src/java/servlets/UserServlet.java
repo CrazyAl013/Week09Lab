@@ -36,11 +36,6 @@ public class UserServlet extends HttpServlet {
                     User user = us.get(email);
                     request.setAttribute("editUser", user);
                     break;
-                case "delete":
-                    us.delete(email);
-                    request.setAttribute("message", "User Deleted Successfully"); 
-                    request.setAttribute("messageType", "success");
-                    break;
                 default:
                     break;
             }
@@ -91,6 +86,11 @@ public class UserServlet extends HttpServlet {
                 case "update":
                     us.update(email, active, firstname, lastname, password, roleID);
                     request.setAttribute("message", "User Updated Successfully"); 
+                    request.setAttribute("messageType", "success");
+                    break;
+                case "delete":
+                    us.delete(email);
+                    request.setAttribute("message", "User Deleted Successfully"); 
                     request.setAttribute("messageType", "success");
                     break;
                 default:
