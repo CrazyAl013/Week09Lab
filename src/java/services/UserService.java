@@ -5,9 +5,11 @@
  */
 package services;
 
+import dataaccess.RoleDB;
 import models.*;
 import dataaccess.UserDB;
 import java.util.List;
+import static org.eclipse.persistence.platform.database.oracle.plsql.OraclePLSQLTypes.Int;
 
 /**
  *
@@ -25,15 +27,20 @@ public class UserService {
         return user;
     }
     
-    public void insert(String email, boolean activity, String first_name, String last_name, String password, Role role) throws Exception{
+    public void insert(String email, boolean activity, String first_name, String last_name, String password, Role id) throws Exception{
         
         //TODO:
         // replace Role role parameter with a int id, then get a Role object from RoleDB using the role id. then assign it to the user
         // also add user to the Role User list
         
-        User user = new User(email, activity, first_name, last_name, password, role);
+        User user = new User(email, activity, first_name, last_name, password, id);
         UserDB userDB = new UserDB();
         userDB.insert(user);
+         RoleDB roleDB = new roleDB();
+        
+      
+        
+        
     }
     
     public void update(String email, boolean activity, String first_name, String last_name, String password, Role role) throws Exception{
@@ -49,6 +56,12 @@ public class UserService {
         UserDB userDB = new UserDB();
         User user = userDB.get(email);
         userDB.delete(user);
+    }
+
+    private static class roleDB extends RoleDB {
+
+        public roleDB() {
+        }
     }
 }
 
