@@ -36,7 +36,9 @@ public class UserService {
         // also add user to the Role User list
         RoleDB roleDB = new RoleDB();
         Role role = roleDB.get(roleID);
-        User user = new User(email, activity, first_name, last_name, password, role);
+        User user = new User(email, activity, first_name, last_name, password);
+        user.setRole(role);
+        role.getUserList().add(user);
         UserDB userDB = new UserDB();
         userDB.insert(user);
     }
