@@ -36,13 +36,18 @@ public class UserServlet extends HttpServlet {
                     User user = us.get(email);
                     request.setAttribute("editUser", user);
                     break;
+                case "delete":
+                    us.delete(email);
+                    request.setAttribute("message", "User Deleted Successfully"); 
+                    request.setAttribute("messageType", "success");
+                    break;
                 default:
                     break;
             }
 
         } catch (Exception e) {
             if (action != null) {
-                request.setAttribute("message", "Could not perform action");
+                request.setAttribute("message", "Could not perform action: " + action);
             }
         }
         
@@ -88,21 +93,17 @@ public class UserServlet extends HttpServlet {
                     request.setAttribute("message", "User Updated Successfully"); 
                     request.setAttribute("messageType", "success");
                     break;
-                case "delete":
-                    us.delete(email);
-                    request.setAttribute("message", "User Deleted Successfully"); 
-                    request.setAttribute("messageType", "success");
-                    break;
+                
                 default:
                     break;
             }
 
         } catch (Exception e) {
-            request.setAttribute("message", "Could not perform action"); 
+            request.setAttribute("message", "Could not perform action: " + action); 
             request.setAttribute("messageType", "error");
         }
         
-         try {
+        try {
             List<User> users = us.getAll();
 
             request.setAttribute("users", users);

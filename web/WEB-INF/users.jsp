@@ -66,7 +66,7 @@
                             <td>${user.email}</td>
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>
-                            <td>${user.role.roleName}</td>
+                            <td class="uppercaseFirstLetter">${user.role.roleName}</td>
 
                             <c:url value="users" var="editurl">
                                 <c:param name="action" value="edit"/>
