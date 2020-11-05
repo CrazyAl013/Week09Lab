@@ -11,19 +11,19 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Users</title>
-        
+
         <link rel="stylesheet" href="${pageContext.request.contextPath}/main.css" type="text/css">
 
     </head>
     <body>
         <c:if test="${message != null}">
-        <div id="messageBox">
-            <p class="${messageType}">${message}</p>
-        </div>
+            <div id="messageBox">
+                <p class="${messageType}">${message}</p>
+            </div>
         </c:if>
-        
+
         <h1>Users</h1>
-        
+
         <div class="grid-container">
             <div class="grid-item">
                 <div class="formContainer">
@@ -67,17 +67,17 @@
                             <td>${user.firstName}</td>
                             <td>${user.lastName}</td>
                             <td>${user.role.roleName}</td>
-                            
+
                             <c:url value="users" var="editurl">
-                            <c:param name="action" value="edit"/>
-                            <c:param name="email" value="${user.email}"/>
+                                <c:param name="action" value="edit"/>
+                                <c:param name="email" value="${user.email}"/>
                             </c:url>
                             <td><a href="${editurl}">Edit</a></td>
-                            
+
                             <c:url value="users" var="deleteurl">
-                            <c:param name="method" value="POST"/>
-                            <c:param name="action" value="delete"/>
-                            <c:param name="email" value="${user.email}"/>
+                                <c:param name="method" value="POST"/>
+                                <c:param name="action" value="delete"/>
+                                <c:param name="email" value="${user.email}"/>
                             </c:url>                     
                             <td><a href="${deleteurl}">Delete</a></td>
                         </tr>
@@ -90,20 +90,23 @@
                 <div class="formContainer">
                     <h3>Edit User</h3>
                     <form method="POST" action="users">
-                        <input placeholder="First Name" type="text" required name="firstname" value="${editUser.firstName}" />
-                        <br>
-                        <input placeholder="Last Name" type="text" required name="lastname" value="${editUser.lastName}" />
-                        <br>
-                        <input type="hidden" name="email" value="${editUser.email}" />
-                        <input type="hidden" name="action" value="update" />
-                        <select name="role">
+                        <input <c:if test="${editUser == null}">disabled</c:if> placeholder="First Name" type="text" required name="firstname" value="${editUser.firstName}" />
+                            <br>
+                            <input <c:if test="${editUser == null}">disabled</c:if> placeholder="Last Name" type="text" required name="lastname" value="${editUser.lastName}" />
+                            <br>
+                            <input <c:if test="${editUser == null}">disabled</c:if> type="hidden" name="email" value="${editUser.email}" />
+                            <input type="hidden" name="action" value="update" />
+                            <select <c:if test="${editUser == null}">disabled</c:if> name="role">
                             <option value="1" <c:if test="${editUser.role.roleId == 1}">selected</c:if>>System Admin</option>
                             <option value="2" <c:if test="${editUser.role.roleId == 2}">selected</c:if>>Regular User</option>
                             <option value="3" <c:if test="${editUser.role.roleId == 3}">selected</c:if>>Company Admin</option>
-                        </select>
-                        <br>
-                        <input <c:if test="${editUser == null}">disabled</c:if> type="submit" value="Update" />
-                    </form>
+                            </select>
+                            <br>
+                            <input <c:if test="${editUser == null}">disabled</c:if> type="submit" value="Update" />
+                        </form>
+                    <c:if test="${editUser == null}">
+                        <p class="helperText">Select a user in the table to edit.</p>
+                    </c:if>
                 </div>
             </div>  
         </div>
