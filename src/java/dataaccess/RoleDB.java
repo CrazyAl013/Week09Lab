@@ -21,7 +21,14 @@ public class RoleDB {
     
     
     public Role get(int id) throws Exception {
-    // TODO: write this to return the Role with the id passed in
-        return null;
+	// Return the Role with the id passed in
+	EntityManager em = DBUtil.getEmFactory().createEntityManager();
+    
+	try {
+            Role role = em.find(Role.class, id);
+            return role;
+        } finally {
+            em.close();
+        }
     }
 }
