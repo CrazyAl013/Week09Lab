@@ -5,10 +5,12 @@
  */
 package services;
 
+import dataaccess.DBUtil;
 import dataaccess.RoleDB;
 import models.*;
 import dataaccess.UserDB;
 import java.util.List;
+import javax.persistence.EntityManager;
 import static org.eclipse.persistence.platform.database.oracle.plsql.OraclePLSQLTypes.Int;
 
 /**
@@ -36,12 +38,25 @@ public class UserService {
         User user = new User(email, activity, first_name, last_name, password, id);
         UserDB userDB = new UserDB();
         userDB.insert(user);
-         RoleDB roleDB = new roleDB();
+         RoleDB roleDB = new RoleDB();
         
       
         
         
     }
+    public class RoleDB {
+    public List<Role> getAll() throws Exception {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+
+        try {
+            List<Role> roles = em.createNamedQuery("Role.findAll", Role.class).getResultList();
+            return roles;
+        } finally {
+            em.close();
+        }
+    }
+    
+    
     
     public void update(String email, boolean activity, String first_name, String last_name, String password, Role role) throws Exception{
         UserDB userDB = new UserDB();
@@ -58,10 +73,7 @@ public class UserService {
         userDB.delete(user);
     }
 
-    private static class roleDB extends RoleDB {
-
-        public roleDB() {
-        }
+  
     }
 }
 
