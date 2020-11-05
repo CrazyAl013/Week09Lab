@@ -72,10 +72,11 @@ public class UserDB {
         EntityTransaction transaction = em.getTransaction();
 
         try {
+            Role role = user.getRole();
+            role.getUserList().remove(user);        
             transaction.begin();
-            user.getRole().getUserList().remove(user);
-            em.remove(user);
-            em.merge(user);
+            em.remove(em.merge(user));
+            em.merge(role);
             transaction.commit();
         } catch(Exception ex) {
             transaction.rollback();
