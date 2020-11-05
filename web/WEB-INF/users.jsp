@@ -35,7 +35,6 @@
             }
 
             #messageBox {
-                color: red;
                 text-align: center;
                 border-radius: 5px;
                 background-color: white;
@@ -52,6 +51,15 @@
                 box-shadow:         4px 4px 11px 2px #ccc;  
 
             }
+            
+            .success {
+                color: green;
+            }
+            
+            .error {
+                color: red;
+            }
+            
 
             @keyframes messageDropdown {
                 0% {top: -300px;}
@@ -119,7 +127,7 @@
     <body>
         <c:if test="${message != null}">
         <div id="messageBox">
-            <p>${message}</p>
+            <p class="${messageType}">${message}</p>
         </div>
         </c:if>
 

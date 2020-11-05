@@ -38,6 +38,8 @@ public class UserServlet extends HttpServlet {
                     break;
                 case "delete":
                     us.delete(email);
+                    request.setAttribute("message", "User Deleted Successfully"); 
+                    request.setAttribute("messageType", "success");
                     break;
                 default:
                     break;
@@ -55,6 +57,7 @@ public class UserServlet extends HttpServlet {
             request.setAttribute("users", users);
         } catch(Exception e)  {
             request.setAttribute("message", "No users found");  
+            request.setAttribute("messageType", "error");
         }
         
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
@@ -73,24 +76,6 @@ public class UserServlet extends HttpServlet {
         String password = request.getParameter("password");
         int roleID = Integer.parseInt(request.getParameter("role"));
         Boolean active = false;
-        Role role = null;
-        
-//        
-//TODO: no longer want to create a Role object, just pass the int id
-//
-        switch (roleID) {
-            case 1:
-                role = new Role(1, "System Admin");
-            break;
-            case 2:
-                role = new Role(2, "Regular User");
-            break;
-            case 3:
-                role = new Role(3, "Company Admin");
-            break;
-            default:
-                role = new Role(2, "Regular User");
-        }
         
         // Create User Service
         UserService us = new UserService();
@@ -99,17 +84,22 @@ public class UserServlet extends HttpServlet {
         try {
             switch (action) {
                 case "add":
-                    us.insert(email, active, firstname, lastname, password, role);
+                    us.insert(email, active, firstname, lastname, password, roleID);
+                    request.setAttribute("message", "User Added Successfully"); 
+                    request.setAttribute("messageType", "success");
                     break;
                 case "update":
-                    us.update(email, active, firstname, lastname, password, role);
+                    us.update(email, active, firstname, lastname, password, roleID);
+                    request.setAttribute("message", "User Updated Successfully"); 
+                    request.setAttribute("messageType", "success");
                     break;
                 default:
                     break;
             }
 
         } catch (Exception e) {
-            request.setAttribute("message", "Could not perform action");
+            request.setAttribute("message", "Could not perform action"); 
+            request.setAttribute("messageType", "error");
         }
         
          try {
@@ -117,7 +107,8 @@ public class UserServlet extends HttpServlet {
 
             request.setAttribute("users", users);
         } catch(Exception e)  {
-            request.setAttribute("message", "No users found");  
+            request.setAttribute("message", "No users found");   
+            request.setAttribute("messageType", "error");
         }
 
         getServletContext().getRequestDispatcher("/WEB-INF/users.jsp").forward(request, response);
